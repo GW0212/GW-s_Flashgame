@@ -467,6 +467,51 @@
     .play-btn:active { transform: scale(0.96); }
 
     /* ═══════════════════════════════════
+       모바일 안내 배너
+    ═══════════════════════════════════ */
+    .mobile-notice {
+      display: none; /* 기본 숨김 — 모바일에서만 표시 */
+      position: relative; z-index: 2;
+      max-width: 540px;
+      margin: 0 auto 1.4rem;
+      padding: 0 1.5rem;
+    }
+    .mobile-notice-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--surface);
+      border: 2px solid var(--accent2);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      box-shadow: 3px 3px 0 var(--border);
+    }
+    [data-theme="dark"] .mobile-notice-inner {
+      box-shadow: 3px 3px 0 var(--accent2);
+    }
+    .mobile-notice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .mobile-notice-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.42rem;
+      color: var(--text2);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+    .mobile-notice-text strong {
+      color: var(--accent2);
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.46rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-notice { display: block; }
+    }
+
+    /* ═══════════════════════════════════
        빈 결과
     ═══════════════════════════════════ */
     .empty-state { text-align: center; padding: 5rem 2rem; display: none; }
@@ -607,6 +652,19 @@
     <span class="search-icon">🎮</span>
     <input type="text" id="searchInput" placeholder="게임 이름 검색..." autocomplete="off" />
     <button id="clearBtn" aria-label="검색 초기화">✕</button>
+  </div>
+</div>
+
+<!-- ══════════ 모바일 안내 (768px 이하에서만 표시) ══════════ -->
+<div class="mobile-notice">
+  <div class="mobile-notice-inner">
+    <div class="mobile-notice-icon">🖥️</div>
+    <div class="mobile-notice-text">
+      <strong>⚠ PC 환경을 권장합니다</strong>
+      플래시 게임 특성상 모바일에서는<br>
+      정상적으로 실행되지 않을 수 있습니다.<br>
+      PC에서 플레이해 주세요.
+    </div>
   </div>
 </div>
 
