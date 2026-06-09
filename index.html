@@ -266,6 +266,129 @@
     #clearBtn:hover { color: var(--accent); }
     #clearBtn.visible { display: block; }
 
+
+
+    /* ═══════════════════════════════════
+       장르 필터
+    ═══════════════════════════════════ */
+    .genre-filter-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 1360px;
+      margin: -1rem auto 2rem;
+      padding: 0 1.5rem;
+    }
+    .genre-filter-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.52rem;
+      color: var(--text2);
+      letter-spacing: 0.12em;
+    }
+    .genre-filter-head .dot { color: var(--accent); }
+    .genre-filter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      scroll-behavior: smooth;
+      overscroll-behavior-x: contain;
+    }
+    .genre-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-height: 34px;
+      padding: 0.48rem 0.72rem;
+      border: 2px solid var(--border2);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      line-height: 1;
+      white-space: nowrap;
+      box-shadow: 2px 2px 0 var(--border);
+      transition: transform 0.12s, background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .genre-btn:focus-visible {
+      outline: 3px solid var(--glow);
+      outline-offset: 3px;
+    }
+    .genre-btn:hover {
+      border-color: var(--accent);
+      background: var(--card-hover);
+      box-shadow: 2px 2px 0 var(--accent2), 0 0 0 3px var(--glow);
+      transform: translateY(-1px);
+    }
+    .genre-btn.active {
+      border-color: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #fff;
+      box-shadow: 3px 3px 0 var(--border2), 0 4px 14px var(--glow);
+    }
+    .genre-btn:active { transform: scale(0.96); }
+    .genre-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 22px;
+      height: 20px;
+      padding: 0 0.35rem;
+      border-radius: 999px;
+      background: var(--surface2);
+      color: var(--accent);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.46rem;
+      line-height: 1;
+    }
+    .genre-btn.active .genre-count {
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+    }
+    .section-current-genre {
+      color: var(--accent2);
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      padding: 0.28rem 0.6rem;
+      box-shadow: 2px 2px 0 var(--border);
+      white-space: nowrap;
+    }
+    .card-genre {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 0.3rem;
+      max-width: 100%;
+      padding: 0.22rem 0.48rem;
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      background: var(--surface2);
+      color: var(--accent2);
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-genre::before {
+      content: '◆';
+      color: var(--accent);
+      font-size: 0.58rem;
+    }
+
     /* ═══════════════════════════════════
        섹션 라벨 — "✦ N CLASSIC FLASH GAMES ✦"
     ═══════════════════════════════════ */
@@ -595,17 +718,84 @@
         border-radius: 8px;
       }
 
-      .controls { padding: 0 1rem; margin-bottom: 2rem; }
-      #searchInput { font-size: 0.88rem; padding: 0.78rem 2.6rem; }
+      .controls { padding: 0 1rem; margin-bottom: 1.15rem; }
+      #searchInput { font-size: 16px; padding: 0.78rem 2.6rem; }
+
+      .genre-filter-wrap {
+        padding: 0 0.9rem;
+        margin: 0 auto 1.25rem;
+      }
+      .genre-filter-head {
+        justify-content: flex-start;
+        font-size: 0.42rem;
+        margin-bottom: 0.55rem;
+        padding-left: 0.15rem;
+      }
+      .genre-filter {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.45rem;
+        overflow-x: auto;
+        padding: 0.55rem;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        background: var(--surface);
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        box-shadow: 3px 3px 0 var(--border);
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+      }
+      .genre-filter::-webkit-scrollbar { height: 4px; }
+      .genre-filter::-webkit-scrollbar-track { background: transparent; }
+      .genre-filter::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 999px; }
+      .genre-btn {
+        flex: 0 0 auto;
+        min-height: 36px;
+        padding: 0.5rem 0.68rem;
+        font-size: 0.72rem;
+        box-shadow: 1px 1px 0 var(--border);
+        scroll-snap-align: start;
+      }
+      .genre-btn:hover { transform: none; }
+      .genre-count { min-width: 20px; height: 18px; font-size: 0.4rem; }
+
+      .mobile-notice { padding: 0 0.9rem; margin-bottom: 1.15rem; }
+      .mobile-notice-inner { align-items: flex-start; padding: 0.65rem 0.78rem; border-radius: 10px; }
+      .mobile-notice-icon { font-size: 1.05rem; line-height: 1.2; }
+      .mobile-notice-text { font-size: 0.38rem; line-height: 1.85; }
+      .mobile-notice-text strong { font-size: 0.42rem; }
 
       .grid-section { padding: 0 0.9rem 3rem; }
-      .section-label { font-size: 0.48rem; gap: 0.5rem; }
-      .count-badge { font-size: 0.44rem; padding: 0.24rem 0.5rem; }
-      .game-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .section-label {
+        justify-content: center;
+        font-size: 0.46rem;
+        gap: 0.45rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.65rem;
+      }
+      .lbl-arrow { display: none; }
+      .count-badge {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.4rem;
+        line-height: 1.65;
+        padding: 0.28rem 0.5rem;
+        text-align: center;
+      }
+      .section-current-genre {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.72rem;
+        padding: 0.28rem 0.65rem;
+      }
+      .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
 
-      .card-body { padding: 0.65rem 0.75rem; gap: 0.5rem; }
-      .card-title { font-size: 0.75rem; }
-      .play-btn { font-size: 0.44rem; padding: 0.52rem 0; }
+      .game-card { border-radius: 9px; }
+      .card-body { padding: 0.65rem 0.7rem; gap: 0.48rem; }
+      .card-genre { font-size: 0.58rem; padding: 0.19rem 0.42rem; }
+      .card-title { font-size: 0.73rem; line-height: 1.4; }
+      .play-btn { font-size: 0.42rem; padding: 0.52rem 0; }
 
       #toTop { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 0.58rem; }
       footer { font-size: 0.4rem; padding: 1.2rem 1rem; }
@@ -613,8 +803,10 @@
 
     /* 아주 작은 화면 */
     @media (max-width: 360px) {
-      .game-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+      .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
       .hero-title-btn { font-size: 0.72rem; }
+      .genre-btn { font-size: 0.68rem; padding: 0.48rem 0.58rem; }
+      .card-title { font-size: 0.68rem; }
     }
   </style>
 </head>
@@ -655,6 +847,13 @@
   </div>
 </div>
 
+
+<!-- ══════════ 장르 필터 ══════════ -->
+<div class="genre-filter-wrap" aria-label="장르 필터 영역">
+  <div class="genre-filter-head"><span class="dot">◆</span> GENRE SELECT <span class="dot">◆</span></div>
+  <div class="genre-filter" id="genreFilter" role="tablist" aria-label="장르별 게임 필터"></div>
+</div>
+
 <!-- ══════════ 모바일 안내 (768px 이하에서만 표시) ══════════ -->
 <div class="mobile-notice">
   <div class="mobile-notice-inner">
@@ -678,6 +877,7 @@
       <span id="resultCount">43</span> CLASSIC FLASH GAMES
       <span class="star">✦</span>
     </span>
+    <span class="section-current-genre" id="activeGenreLabel">전체</span>
   </div>
   <div class="game-grid" id="gameGrid"></div>
   <div class="empty-state" id="emptyState">
@@ -698,49 +898,49 @@
    게임 데이터
 ═══════════════════════════════════ */
 const GAMES = [
-  { title:"4구 당구",                        icon:"icons/4ball.jpg",                  url:"https://gw0212.github.io/4ball" },
-  { title:"감옥탈출 리마스터",               icon:"icons/prison_escape_remaster.png", url:"https://gw0212.github.io/prison-escape-remaster/" },
-  { title:"검 강화하기",                     icon:"icons/strengthening_sword.png",    url:"https://gw0212.github.io/strengthening_the_sword" },
-  { title:"고군분투",                        icon:"icons/struggling.png",             url:"https://gw0212.github.io/struggling/" },
-  { title:"고향 만두",                       icon:"icons/dumplings_hometown.png",     url:"https://gw0212.github.io/Dumplings_from_my_hometown" },
-  { title:"눈빛 보내기",                     icon:"icons/eye_signal.png",             url:"https://gw0212.github.io/eye_signal" },
-  { title:"매닉 라이더",                     icon:"icons/manic_rider.png",            url:"https://gw0212.github.io/manic_rider" },
-  { title:"메탈 슬러그 3 브루탈",            icon:"icons/metal_slug3.png",            url:"https://gw0212.github.io/metal_slug3" },
-  { title:"메탈 슬러그 디펜스",              icon:"icons/metal_slug_defense.png",     url:"https://gw0212.github.io/Metal_Slug_Defense" },
-  { title:"메탈 슬러그 밀리터리 레스큐",     icon:"icons/metal_slug_military.png",    url:"https://gw0212.github.io/metal_slug_military_rescue" },
-  { title:"바인딩 오브 아이작",              icon:"icons/binding_of_isaac.png",       url:"https://gw0212.github.io/The_Binding_of_Isaac" },
-  { title:"박스헤드 1인용",                  icon:"icons/box_head1.png",              url:"https://gw0212.github.io/box_head1" },
-  { title:"박스헤드 2인용",                  icon:"icons/box_head2.png",              url:"https://gw0212.github.io/box_head2" },
-  { title:"보글보글2",                       icon:"icons/bubble_bobble2.png",         url:"https://gw0212.github.io/bubble_bobble_2" },
-  { title:"사무라이 잭",                     icon:"icons/samurai_jack.png",           url:"https://gw0212.github.io/Samurai_Jack/" },
-  { title:"소닉 더 헤지혹",                  icon:"icons/sonic.png",                  url:"https://gw0212.github.io/sonic" },
-  { title:"슈의 라면가게",                   icon:"icons/shoos_ramen.png",            url:"https://gw0212.github.io/Shoo-s_ramen_shop" },
-  { title:"슈퍼마리오 63",                   icon:"icons/supermario63.png",           url:"https://gw0212.github.io/supermario63/" },
-  { title:"스톰 더 하우스 1",                icon:"icons/storm_house1.jpg",           url:"https://gw0212.github.io/Storm_the_House1" },
-  { title:"스톰 더 하우스 2",                icon:"icons/storm_house2.jpg",           url:"https://gw0212.github.io/Storm_the_House2" },
-  { title:"심영의 모험 2",                   icon:"icons/simyoung_adventure2.png",    url:"https://gw0212.github.io/adventure_of_simyoung2" },
-  { title:"아르마딜로 나이트 1",             icon:"icons/armadillo_knight1.jpg",      url:"https://gw0212.github.io/Armadillo_Knight1" },
-  { title:"아르마딜로 나이트 2",             icon:"icons/armadillo_knight2.png",      url:"https://gw0212.github.io/Armadillo_Knight2" },
-  { title:"아빠와 나",                       icon:"icons/dad_and_me.png",             url:"https://gw0212.github.io/Dad_and_Me" },
-  { title:"아빠와나 외계인편",               icon:"icons/alien_hominid.png",          url:"https://gw0212.github.io/alien_hominid/" },
-  { title:"아이탈출 1",                      icon:"icons/boy_escape1.png",            url:"https://gw0212.github.io/boy_escape1" },
-  { title:"아이탈출 2",                      icon:"icons/boy_escape2.png",            url:"https://gw0212.github.io/boy_escape2" },
-  { title:"아이탈출 3",                      icon:"icons/boy_escape3.png",            url:"https://gw0212.github.io/boy_escape3" },
-  { title:"아이탈출 4",                      icon:"icons/boy_escape4.png",            url:"https://gw0212.github.io/boy_escape4" },
-  { title:"엔젤메이플 데비존",               icon:"icons/angel_maple_devijone.png",   url:"https://gw0212.github.io/Angel_Maple_Devijone/" },
-  { title:"엔젤메이플 듀얼블레이드",         icon:"icons/angel_maple_dualblade.png",  url:"https://gw0212.github.io/Angel_Maple_Dualblade/" },
-  { title:"엔젤메이플 드래곤마스터 에반",    icon:"icons/angel_maple_evan.png",       url:"https://gw0212.github.io/Angel_Maple_evan/" },
-  { title:"엔젤메이플 발록사냥",             icon:"icons/angel_maple_hunting.png",    url:"https://gw0212.github.io/Angel_Maple_hunting_balok" },
-  { title:"엔젤메이플 월묘퀘스트",           icon:"icons/angel_maple_quest.png",      url:"https://gw0212.github.io/Angel_Maple_Quest/" },
-  { title:"이더레나",                        icon:"icons/etherena.png",               url:"https://gw0212.github.io/etherena" },
-  { title:"전쟁시대 1",                      icon:"icons/age_of_war.png",             url:"https://gw0212.github.io/age_of_war/" },
-  { title:"제보즈 쇼다운",                   icon:"icons/xevoz_showdown.png",         url:"https://gw0212.github.io/xevoz_showdown" },
-  { title:"짱구교실 - 짱구의 액션 탐험대",  icon:"icons/jjanggu_travle.png",          url:"https://gw0212.github.io/sin_jjang_travle/" },
-  { title:"카오스팩션1",                     icon:"icons/chaos_faction1.png",         url:"https://gw0212.github.io/chaos_faction1" },
-  { title:"팔라독",                          icon:"icons/paladog.jpg",                url:"https://gw0212.github.io/paladog" },
-  { title:"풍선타워디펜스 4",                icon:"icons/btd4.png",                   url:"https://gw0212.github.io/BTD4" },
-  { title:"풍선타워디펜스 5",                icon:"icons/btd5.png",                   url:"https://gw0212.github.io/BTD5" },
-  { title:"후레쉬맨",                        icon:"icons/freshman.jpg",               url:"https://gw0212.github.io/Fresh_Man" },
+  { title:"4구 당구", genre:"스포츠",                        icon:"icons/4ball.jpg",                  url:"https://gw0212.github.io/4ball" },
+  { title:"감옥탈출 리마스터", genre:"탈출/퍼즐",               icon:"icons/prison_escape_remaster.png", url:"https://gw0212.github.io/prison-escape-remaster/" },
+  { title:"검 강화하기", genre:"강화/육성",                     icon:"icons/strengthening_sword.png",    url:"https://gw0212.github.io/strengthening_the_sword" },
+  { title:"고군분투", genre:"아케이드",                        icon:"icons/struggling.png",             url:"https://gw0212.github.io/struggling/" },
+  { title:"고향 만두", genre:"캐주얼",                       icon:"icons/dumplings_hometown.png",     url:"https://gw0212.github.io/Dumplings_from_my_hometown" },
+  { title:"눈빛 보내기", genre:"캐주얼",                     icon:"icons/eye_signal.png",             url:"https://gw0212.github.io/eye_signal" },
+  { title:"매닉 라이더", genre:"레이싱",                     icon:"icons/manic_rider.png",            url:"https://gw0212.github.io/manic_rider" },
+  { title:"메탈 슬러그 3 브루탈", genre:"슈팅",            icon:"icons/metal_slug3.png",            url:"https://gw0212.github.io/metal_slug3" },
+  { title:"메탈 슬러그 디펜스", genre:"전략/디펜스",              icon:"icons/metal_slug_defense.png",     url:"https://gw0212.github.io/Metal_Slug_Defense" },
+  { title:"메탈 슬러그 밀리터리 레스큐", genre:"슈팅",     icon:"icons/metal_slug_military.png",    url:"https://gw0212.github.io/metal_slug_military_rescue" },
+  { title:"바인딩 오브 아이작", genre:"액션",              icon:"icons/binding_of_isaac.png",       url:"https://gw0212.github.io/The_Binding_of_Isaac" },
+  { title:"박스헤드 1인용", genre:"슈팅",                  icon:"icons/box_head1.png",              url:"https://gw0212.github.io/box_head1" },
+  { title:"박스헤드 2인용", genre:"슈팅",                  icon:"icons/box_head2.png",              url:"https://gw0212.github.io/box_head2" },
+  { title:"보글보글2", genre:"아케이드",                       icon:"icons/bubble_bobble2.png",         url:"https://gw0212.github.io/bubble_bobble_2" },
+  { title:"사무라이 잭", genre:"액션",                     icon:"icons/samurai_jack.png",           url:"https://gw0212.github.io/Samurai_Jack/" },
+  { title:"소닉 더 헤지혹", genre:"아케이드",                  icon:"icons/sonic.png",                  url:"https://gw0212.github.io/sonic" },
+  { title:"슈의 라면가게", genre:"캐주얼",                   icon:"icons/shoos_ramen.png",            url:"https://gw0212.github.io/Shoo-s_ramen_shop" },
+  { title:"슈퍼마리오 63", genre:"아케이드",                   icon:"icons/supermario63.png",           url:"https://gw0212.github.io/supermario63/" },
+  { title:"스톰 더 하우스 1", genre:"전략/디펜스",                icon:"icons/storm_house1.jpg",           url:"https://gw0212.github.io/Storm_the_House1" },
+  { title:"스톰 더 하우스 2", genre:"전략/디펜스",                icon:"icons/storm_house2.jpg",           url:"https://gw0212.github.io/Storm_the_House2" },
+  { title:"심영의 모험 2", genre:"액션",                   icon:"icons/simyoung_adventure2.png",    url:"https://gw0212.github.io/adventure_of_simyoung2" },
+  { title:"아르마딜로 나이트 1", genre:"액션",             icon:"icons/armadillo_knight1.jpg",      url:"https://gw0212.github.io/Armadillo_Knight1" },
+  { title:"아르마딜로 나이트 2", genre:"액션",             icon:"icons/armadillo_knight2.png",      url:"https://gw0212.github.io/Armadillo_Knight2" },
+  { title:"아빠와 나", genre:"액션",                       icon:"icons/dad_and_me.png",             url:"https://gw0212.github.io/Dad_and_Me" },
+  { title:"아빠와나 외계인편", genre:"슈팅",               icon:"icons/alien_hominid.png",          url:"https://gw0212.github.io/alien_hominid/" },
+  { title:"아이탈출 1", genre:"탈출/퍼즐",                      icon:"icons/boy_escape1.png",            url:"https://gw0212.github.io/boy_escape1" },
+  { title:"아이탈출 2", genre:"탈출/퍼즐",                      icon:"icons/boy_escape2.png",            url:"https://gw0212.github.io/boy_escape2" },
+  { title:"아이탈출 3", genre:"탈출/퍼즐",                      icon:"icons/boy_escape3.png",            url:"https://gw0212.github.io/boy_escape3" },
+  { title:"아이탈출 4", genre:"탈출/퍼즐",                      icon:"icons/boy_escape4.png",            url:"https://gw0212.github.io/boy_escape4" },
+  { title:"엔젤메이플 데비존", genre:"RPG/모험",               icon:"icons/angel_maple_devijone.png",   url:"https://gw0212.github.io/Angel_Maple_Devijone/" },
+  { title:"엔젤메이플 듀얼블레이드", genre:"RPG/모험",         icon:"icons/angel_maple_dualblade.png",  url:"https://gw0212.github.io/Angel_Maple_Dualblade/" },
+  { title:"엔젤메이플 드래곤마스터 에반", genre:"RPG/모험",    icon:"icons/angel_maple_evan.png",       url:"https://gw0212.github.io/Angel_Maple_evan/" },
+  { title:"엔젤메이플 발록사냥", genre:"RPG/모험",             icon:"icons/angel_maple_hunting.png",    url:"https://gw0212.github.io/Angel_Maple_hunting_balok" },
+  { title:"엔젤메이플 월묘퀘스트", genre:"RPG/모험",           icon:"icons/angel_maple_quest.png",      url:"https://gw0212.github.io/Angel_Maple_Quest/" },
+  { title:"이더레나", genre:"격투",                        icon:"icons/etherena.png",               url:"https://gw0212.github.io/etherena" },
+  { title:"전쟁시대 1", genre:"전략/디펜스",                      icon:"icons/age_of_war.png",             url:"https://gw0212.github.io/age_of_war/" },
+  { title:"제보즈 쇼다운", genre:"격투",                   icon:"icons/xevoz_showdown.png",         url:"https://gw0212.github.io/xevoz_showdown" },
+  { title:"짱구교실 - 짱구의 액션 탐험대", genre:"액션",  icon:"icons/jjanggu_travle.png",          url:"https://gw0212.github.io/sin_jjang_travle/" },
+  { title:"카오스팩션1", genre:"격투",                     icon:"icons/chaos_faction1.png",         url:"https://gw0212.github.io/chaos_faction1" },
+  { title:"팔라독", genre:"전략/디펜스",                          icon:"icons/paladog.jpg",                url:"https://gw0212.github.io/paladog" },
+  { title:"풍선타워디펜스 4", genre:"전략/디펜스",                icon:"icons/btd4.png",                   url:"https://gw0212.github.io/BTD4" },
+  { title:"풍선타워디펜스 5", genre:"전략/디펜스",                icon:"icons/btd5.png",                   url:"https://gw0212.github.io/BTD5" },
+  { title:"후레쉬맨", genre:"액션",                        icon:"icons/freshman.jpg",               url:"https://gw0212.github.io/Fresh_Man" },
 ];
 
 /* ═══════════════════════════════════
@@ -798,6 +998,10 @@ const GAMES = [
 const grid    = document.getElementById('gameGrid');
 const empty   = document.getElementById('emptyState');
 const countEl = document.getElementById('resultCount');
+const genreFilter = document.getElementById('genreFilter');
+const activeGenreLabel = document.getElementById('activeGenreLabel');
+const ALL_GENRE = '전체';
+let activeGenre = ALL_GENRE;
 
 function renderCards(list) {
   grid.innerHTML = '';
@@ -825,6 +1029,7 @@ function renderCards(list) {
         </div>
       </a>
       <div class="card-body">
+        <div class="card-genre">${game.genre}</div>
         <div class="card-title">${game.title}</div>
         <div class="card-footer">
           <a class="play-btn" href="${game.url}" target="_blank" rel="noopener">▶ PLAY</a>
@@ -841,18 +1046,71 @@ function renderCards(list) {
 const searchInput = document.getElementById('searchInput');
 const clearBtn    = document.getElementById('clearBtn');
 
-searchInput.addEventListener('input', () => {
+function getGenreList() {
+  return [ALL_GENRE, ...new Set(GAMES.map(game => game.genre))];
+}
+
+function getGenreCount(genre) {
+  return genre === ALL_GENRE ? GAMES.length : GAMES.filter(game => game.genre === genre).length;
+}
+
+function renderGenreButtons() {
+  genreFilter.innerHTML = '';
+  getGenreList().forEach((genre) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'genre-btn';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', genre === activeGenre ? 'true' : 'false');
+    btn.dataset.genre = genre;
+    btn.innerHTML = `${genre}<span class="genre-count">${getGenreCount(genre)}</span>`;
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      activeGenre = (genre !== ALL_GENRE && activeGenre === genre) ? ALL_GENRE : genre;
+      applyFilters({ preserveScroll: true });
+    });
+    genreFilter.appendChild(btn);
+  });
+}
+
+function getFilteredGames() {
   const q = searchInput.value.trim().toLowerCase();
-  clearBtn.classList.toggle('visible', q.length > 0);
+  return GAMES.filter((game) => {
+    const matchesGenre = activeGenre === ALL_GENRE || game.genre === activeGenre;
+    const matchesSearch = !q || game.title.toLowerCase().includes(q) || game.genre.toLowerCase().includes(q);
+    return matchesGenre && matchesSearch;
+  });
+}
+
+function updateGenreUI() {
+  document.querySelectorAll('.genre-btn').forEach((btn) => {
+    const selected = btn.dataset.genre === activeGenre;
+    btn.classList.toggle('active', selected);
+    btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+  });
+  activeGenreLabel.textContent = activeGenre;
+}
+
+function applyFilters(options = {}) {
   const sy = window.scrollY;
-  renderCards(q ? GAMES.filter(g => g.title.toLowerCase().includes(q)) : GAMES);
-  window.scrollTo({ top: sy, behavior: 'instant' });
+  clearBtn.classList.toggle('visible', searchInput.value.trim().length > 0);
+  renderCards(getFilteredGames());
+  updateGenreUI();
+
+  // 장르 변경 시 화면이 강제로 아래로 이동하지 않도록 현재 세로 위치를 유지합니다.
+  if (options.preserveScroll) {
+    window.scrollTo(0, sy);
+    requestAnimationFrame(() => window.scrollTo(0, sy));
+  }
+}
+
+searchInput.addEventListener('input', () => {
+  applyFilters({ preserveScroll: true });
 });
 
 clearBtn.addEventListener('click', () => {
   searchInput.value = '';
-  clearBtn.classList.remove('visible');
-  renderCards(GAMES);
+  applyFilters({ preserveScroll: true });
   searchInput.focus();
 });
 
@@ -861,8 +1119,9 @@ clearBtn.addEventListener('click', () => {
 ═══════════════════════════════════ */
 function resetAll() {
   searchInput.value = '';
+  activeGenre = ALL_GENRE;
   clearBtn.classList.remove('visible');
-  renderCards(GAMES);
+  applyFilters({ preserveScroll: false });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 document.getElementById('heroTitleBtn').addEventListener('click', resetAll);
@@ -892,7 +1151,8 @@ toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'sm
 /* ═══════════════════════════════════
    초기 렌더
 ═══════════════════════════════════ */
-renderCards(GAMES);
+renderGenreButtons();
+applyFilters();
 </script>
 </body>
 </html>
