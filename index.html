@@ -365,6 +365,88 @@
       box-shadow: 2px 2px 0 var(--border);
       white-space: nowrap;
     }
+
+    /* ═══════════════════════════════════
+       정렬 필터
+    ═══════════════════════════════════ */
+    .sort-filter-wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 1360px;
+      margin: -1.15rem auto 1.8rem;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .section-label .sort-filter-wrap {
+      max-width: none;
+      margin: 0 0 0 auto;
+      padding: 0;
+      justify-content: flex-end;
+      gap: 0;
+      flex: 0 1 auto;
+    }
+    .sort-filter-head {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.48rem;
+      color: var(--text2);
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+    .sort-filter-head .dot { color: var(--accent); }
+    .sort-filter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.35rem;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      box-shadow: 2px 2px 0 var(--border);
+    }
+    .section-label .sort-filter {
+      box-shadow: 2px 2px 0 var(--border);
+    }
+    .sort-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 0.38rem 0.65rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text2);
+      cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+      transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .sort-btn:hover {
+      color: var(--accent);
+      background: var(--card-hover);
+      border-color: var(--border2);
+    }
+    .sort-btn.active {
+      color: #fff;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-color: var(--accent);
+      box-shadow: 0 3px 10px var(--glow);
+    }
+    .sort-btn:focus-visible {
+      outline: 3px solid var(--glow);
+      outline-offset: 3px;
+    }
+    .sort-btn:active { transform: scale(0.96); }
     .card-genre {
       display: inline-flex;
       align-items: center;
@@ -408,9 +490,23 @@
       border-bottom: 2px solid var(--border);
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      transition: border-color 0.35s;
+    }
+    .section-summary {
+      display: inline-flex;
+      align-items: center;
       flex-wrap: wrap;
       gap: 0.6rem;
-      transition: border-color 0.35s;
+      min-width: 0;
+    }
+    .section-divider {
+      color: var(--border2);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      line-height: 1;
     }
     .lbl-arrow { color: var(--accent); animation: arrow-pulse 1.5s ease-in-out infinite; }
     @keyframes arrow-pulse { 0%,100%{transform:translateX(0)} 50%{transform:translateX(3px)} }
@@ -557,6 +653,10 @@
       line-height: 1.45;
       color: var(--text);
       word-break: keep-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .card-footer { margin-top: auto; }
     .play-btn {
@@ -645,6 +745,42 @@
       font-size: 0.6rem;
       color: var(--text2);
       line-height: 2.6;
+    }
+
+    /* ═══════════════════════════════════
+       모바일 플레이 안내 토스트
+    ═══════════════════════════════════ */
+    .mobile-play-toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(1.1rem + env(safe-area-inset-bottom));
+      z-index: 900;
+      width: min(92vw, 420px);
+      padding: 0.82rem 1rem;
+      border: 2px solid var(--accent2);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 4px 4px 0 var(--border), 0 8px 24px rgba(0,0,0,0.18);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.45;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 18px);
+      transition: opacity 0.22s, transform 0.22s;
+    }
+    .mobile-play-toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    [data-theme="dark"] .mobile-play-toast {
+      box-shadow: 4px 4px 0 var(--accent2), 0 8px 24px rgba(0,0,0,0.5);
+    }
+    @media (min-width: 769px) {
+      .mobile-play-toast { display: none; }
     }
 
     /* ═══════════════════════════════════
@@ -743,6 +879,7 @@
         background: color-mix(in srgb, var(--surface) 88%, transparent);
         box-shadow: 3px 3px 0 var(--border);
         scroll-snap-type: x proximity;
+        scrollbar-width: thin;
         -webkit-overflow-scrolling: touch;
       }
       .genre-filter::-webkit-scrollbar { height: 4px; }
@@ -759,6 +896,32 @@
       .genre-btn:hover { transform: none; }
       .genre-count { min-width: 20px; height: 18px; font-size: 0.4rem; }
 
+      .sort-filter-wrap {
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding: 0 0.9rem;
+        margin: 0 auto 1.1rem;
+      }
+      .sort-filter-head {
+        width: 100%;
+        font-size: 0.4rem;
+        padding-left: 0.15rem;
+      }
+      .sort-filter {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.25rem;
+        padding: 0.35rem;
+        border-radius: 12px;
+        box-shadow: 3px 3px 0 var(--border);
+      }
+      .sort-btn {
+        flex: 1 1 0;
+        min-height: 34px;
+        padding: 0.42rem 0.25rem;
+        font-size: 0.68rem;
+      }
+
       .mobile-notice { padding: 0 0.9rem; margin-bottom: 1.15rem; }
       .mobile-notice-inner { align-items: flex-start; padding: 0.65rem 0.78rem; border-radius: 10px; }
       .mobile-notice-icon { font-size: 1.05rem; line-height: 1.2; }
@@ -769,19 +932,24 @@
       .section-label {
         justify-content: center;
         font-size: 0.46rem;
-        gap: 0.45rem;
+        gap: 0.55rem;
         margin-bottom: 1rem;
         padding-bottom: 0.65rem;
       }
+      .section-summary {
+        width: 100%;
+        justify-content: center;
+        gap: 0.45rem;
+      }
       .lbl-arrow { display: none; }
       .count-badge {
-        width: 100%;
         justify-content: center;
         font-size: 0.4rem;
         line-height: 1.65;
         padding: 0.28rem 0.5rem;
         text-align: center;
       }
+      .section-divider { font-size: 0.42rem; }
       .section-current-genre {
         max-width: 100%;
         overflow: hidden;
@@ -789,12 +957,23 @@
         font-size: 0.72rem;
         padding: 0.28rem 0.65rem;
       }
+      .section-label .sort-filter-wrap {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+      }
       .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
 
       .game-card { border-radius: 9px; }
       .card-body { padding: 0.65rem 0.7rem; gap: 0.48rem; }
       .card-genre { font-size: 0.58rem; padding: 0.19rem 0.42rem; }
-      .card-title { font-size: 0.73rem; line-height: 1.4; }
+      .card-title {
+        min-height: calc(0.73rem * 1.4 * 2);
+        font-size: 0.73rem;
+        line-height: 1.4;
+      }
+      .card-thumb-link::after { display: none; }
       .play-btn { font-size: 0.42rem; padding: 0.52rem 0; }
 
       #toTop { bottom: 1rem; right: 1rem; width: 40px; height: 40px; font-size: 0.58rem; }
@@ -850,8 +1029,8 @@
 
 <!-- ══════════ 장르 필터 ══════════ -->
 <div class="genre-filter-wrap" aria-label="장르 필터 영역">
-  <div class="genre-filter-head"><span class="dot">◆</span> GENRE SELECT <span class="dot">◆</span></div>
-  <div class="genre-filter" id="genreFilter" role="tablist" aria-label="장르별 게임 필터"></div>
+  <div class="genre-filter-head"><span class="dot">◆</span> 장르 필터 <span class="dot">◆</span></div>
+  <div class="genre-filter" id="genreFilter" role="group" aria-label="장르별 게임 필터"></div>
 </div>
 
 <!-- ══════════ 모바일 안내 (768px 이하에서만 표시) ══════════ -->
@@ -871,13 +1050,19 @@
 <section class="grid-section">
   <!-- 섹션 라벨에 배지 통합 -->
   <div class="section-label">
-    <span class="lbl-arrow">▶</span>
-    <span class="count-badge">
-      <span class="star">✦</span>
-      <span id="resultCount">43</span> CLASSIC FLASH GAMES
-      <span class="star">✦</span>
-    </span>
-    <span class="section-current-genre" id="activeGenreLabel">전체</span>
+    <div class="section-summary">
+      <span class="lbl-arrow">▶</span>
+      <span class="count-badge">
+        <span class="star">✦</span>
+        <span id="resultCount">43</span> CLASSIC FLASH GAMES
+        <span class="star">✦</span>
+      </span>
+      <span class="section-divider" aria-hidden="true">/</span>
+      <span class="section-current-genre" id="activeGenreLabel">전체</span>
+    </div>
+    <div class="sort-filter-wrap section-sort" aria-label="정렬 영역">
+      <div class="sort-filter" id="sortFilter" role="group" aria-label="게임 정렬"></div>
+    </div>
   </div>
   <div class="game-grid" id="gameGrid"></div>
   <div class="empty-state" id="emptyState">
@@ -892,6 +1077,7 @@
 </footer>
 
 <button id="toTop" aria-label="맨 위로">▲</button>
+<div class="mobile-play-toast" id="mobilePlayToast" role="status" aria-live="polite">모바일에서는 실행이 불안정할 수 있습니다. PC 환경을 권장합니다.</div>
 
 <script>
 /* ═══════════════════════════════════
@@ -999,9 +1185,25 @@ const grid    = document.getElementById('gameGrid');
 const empty   = document.getElementById('emptyState');
 const countEl = document.getElementById('resultCount');
 const genreFilter = document.getElementById('genreFilter');
+const sortFilter = document.getElementById('sortFilter');
 const activeGenreLabel = document.getElementById('activeGenreLabel');
+const mobilePlayToast = document.getElementById('mobilePlayToast');
 const ALL_GENRE = '전체';
+const SORT_OPTIONS = [
+  { key: 'default', label: '전체' },
+  { key: 'title', label: '가나다순' },
+  { key: 'genre', label: '장르순' },
+  { key: 'popular', label: '인기순' },
+];
+const POPULAR_TITLES = [
+  '슈퍼마리오 63', '팔라독', '전쟁시대 1', '풍선타워디펜스 5', '풍선타워디펜스 4',
+  '메탈 슬러그 3 브루탈', '메탈 슬러그 디펜스', '박스헤드 2인용', '감옥탈출 리마스터',
+  '아이탈출 4', '보글보글2', '소닉 더 헤지혹', '카오스팩션1', '아빠와 나', '슈의 라면가게'
+];
+const popularRank = new Map(POPULAR_TITLES.map((title, index) => [title, index]));
 let activeGenre = ALL_GENRE;
+let activeSort = 'default';
+let toastTimer = null;
 
 function renderCards(list) {
   grid.innerHTML = '';
@@ -1036,6 +1238,10 @@ function renderCards(list) {
         </div>
       </div>
     `;
+    card.querySelectorAll('.card-thumb-link, .play-btn').forEach((link) => {
+      link.addEventListener('pointerdown', showMobilePlayToast, { passive: true });
+      link.addEventListener('click', showMobilePlayToast, { passive: true });
+    });
     grid.appendChild(card);
   });
 }
@@ -1060,35 +1266,102 @@ function renderGenreButtons() {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'genre-btn';
-    btn.setAttribute('role', 'tab');
-    btn.setAttribute('aria-selected', genre === activeGenre ? 'true' : 'false');
+    btn.setAttribute('aria-pressed', genre === activeGenre ? 'true' : 'false');
+    btn.setAttribute('aria-label', `${genre} 장르 보기`);
     btn.dataset.genre = genre;
     btn.innerHTML = `${genre}<span class="genre-count">${getGenreCount(genre)}</span>`;
     btn.addEventListener('click', (event) => {
       event.preventDefault();
       activeGenre = (genre !== ALL_GENRE && activeGenre === genre) ? ALL_GENRE : genre;
-      applyFilters({ preserveScroll: true });
+      applyFilters({ preserveScroll: true, centerGenre: true });
     });
     genreFilter.appendChild(btn);
   });
 }
 
+function renderSortButtons() {
+  sortFilter.innerHTML = '';
+  SORT_OPTIONS.forEach((option) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sort-btn';
+    btn.dataset.sort = option.key;
+    btn.textContent = option.label;
+    btn.setAttribute('aria-pressed', option.key === activeSort ? 'true' : 'false');
+    btn.setAttribute('aria-label', `${option.label} 정렬`);
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+      activeSort = (option.key !== 'default' && activeSort === option.key) ? 'default' : option.key;
+      applyFilters({ preserveScroll: true });
+    });
+    sortFilter.appendChild(btn);
+  });
+}
+
+function sortGames(list) {
+  const sorted = [...list];
+  const originalIndex = (game) => GAMES.indexOf(game);
+  const byTitle = (a, b) => a.title.localeCompare(b.title, 'ko-KR') || originalIndex(a) - originalIndex(b);
+
+  if (activeSort === 'title') {
+    sorted.sort(byTitle);
+  } else if (activeSort === 'genre') {
+    sorted.sort((a, b) => a.genre.localeCompare(b.genre, 'ko-KR') || byTitle(a, b));
+  } else if (activeSort === 'popular') {
+    sorted.sort((a, b) => {
+      const rankA = popularRank.has(a.title) ? popularRank.get(a.title) : 999 + originalIndex(a);
+      const rankB = popularRank.has(b.title) ? popularRank.get(b.title) : 999 + originalIndex(b);
+      return rankA - rankB;
+    });
+  }
+  return sorted;
+}
+
 function getFilteredGames() {
   const q = searchInput.value.trim().toLowerCase();
-  return GAMES.filter((game) => {
+  const filtered = GAMES.filter((game) => {
     const matchesGenre = activeGenre === ALL_GENRE || game.genre === activeGenre;
     const matchesSearch = !q || game.title.toLowerCase().includes(q) || game.genre.toLowerCase().includes(q);
     return matchesGenre && matchesSearch;
   });
+  return sortGames(filtered);
 }
 
 function updateGenreUI() {
   document.querySelectorAll('.genre-btn').forEach((btn) => {
     const selected = btn.dataset.genre === activeGenre;
     btn.classList.toggle('active', selected);
-    btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
   });
   activeGenreLabel.textContent = activeGenre;
+}
+
+function updateSortUI() {
+  document.querySelectorAll('.sort-btn').forEach((btn) => {
+    const selected = btn.dataset.sort === activeSort;
+    btn.classList.toggle('active', selected);
+    btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+  });
+}
+
+function centerActiveGenreButton() {
+  const activeBtn = genreFilter.querySelector('.genre-btn.active');
+  if (!activeBtn || genreFilter.scrollWidth <= genreFilter.clientWidth + 4) return;
+
+  const nextLeft = activeBtn.offsetLeft - (genreFilter.clientWidth - activeBtn.offsetWidth) / 2;
+  genreFilter.scrollTo({
+    left: Math.max(0, nextLeft),
+    behavior: 'smooth'
+  });
+}
+
+function showMobilePlayToast() {
+  if (!window.matchMedia('(max-width: 768px)').matches || !mobilePlayToast) return;
+  mobilePlayToast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    mobilePlayToast.classList.remove('show');
+  }, 2100);
 }
 
 function applyFilters(options = {}) {
@@ -1096,11 +1369,17 @@ function applyFilters(options = {}) {
   clearBtn.classList.toggle('visible', searchInput.value.trim().length > 0);
   renderCards(getFilteredGames());
   updateGenreUI();
+  updateSortUI();
 
-  // 장르 변경 시 화면이 강제로 아래로 이동하지 않도록 현재 세로 위치를 유지합니다.
+  // 장르/정렬 변경 시 화면이 강제로 아래로 이동하지 않도록 현재 세로 위치를 유지합니다.
   if (options.preserveScroll) {
     window.scrollTo(0, sy);
-    requestAnimationFrame(() => window.scrollTo(0, sy));
+    requestAnimationFrame(() => {
+      if (options.centerGenre) centerActiveGenreButton();
+      window.scrollTo(0, sy);
+    });
+  } else if (options.centerGenre) {
+    requestAnimationFrame(centerActiveGenreButton);
   }
 }
 
@@ -1120,8 +1399,9 @@ clearBtn.addEventListener('click', () => {
 function resetAll() {
   searchInput.value = '';
   activeGenre = ALL_GENRE;
+  activeSort = 'default';
   clearBtn.classList.remove('visible');
-  applyFilters({ preserveScroll: false });
+  applyFilters({ preserveScroll: false, centerGenre: true });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 document.getElementById('heroTitleBtn').addEventListener('click', resetAll);
@@ -1152,7 +1432,8 @@ toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'sm
    초기 렌더
 ═══════════════════════════════════ */
 renderGenreButtons();
-applyFilters();
+renderSortButtons();
+applyFilters({ centerGenre: true });
 </script>
 </body>
 </html>
