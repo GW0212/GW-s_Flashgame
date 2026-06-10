@@ -1009,7 +1009,7 @@
 
 <!-- 제목 아래 / 검색창 위 : 게임 수 + 다크토글 -->
 <div class="search-meta">
-  <div class="game-count-inline" id="headerCount">43 GAMES</div>
+  <div class="game-count-inline" id="headerCount">63 GAMES</div>
   <button class="theme-toggle" id="themeToggle" title="다크/라이트 전환" aria-label="테마 전환">
     <span class="t-sun">☀</span>
     <span class="t-moon">🌙</span>
@@ -1054,7 +1054,7 @@
       <span class="lbl-arrow">▶</span>
       <span class="count-badge">
         <span class="star">✦</span>
-        <span id="resultCount">43</span> CLASSIC FLASH GAMES
+        <span id="resultCount">63</span> CLASSIC FLASH GAMES
         <span class="star">✦</span>
       </span>
       <span class="section-divider" aria-hidden="true">/</span>
@@ -1127,6 +1127,26 @@ const GAMES = [
   { title:"풍선타워디펜스 4", genre:"전략/디펜스",                icon:"icons/btd4.png",                   url:"https://gw0212.github.io/BTD4" },
   { title:"풍선타워디펜스 5", genre:"전략/디펜스",                icon:"icons/btd5.png",                   url:"https://gw0212.github.io/BTD5" },
   { title:"후레쉬맨", genre:"액션",                        icon:"icons/freshman.jpg",               url:"https://gw0212.github.io/Fresh_Man" },
+  { title:"1vs1 축구", genre:"스포츠", icon:"icons/1vs1_soccer.png", url:"https://gw0212.github.io/1vs1soccer/" },
+  { title:"2048", genre:"탈출/퍼즐", icon:"icons/2048.png", url:"https://gw0212.github.io/2048_flashgame/" },
+  { title:"댄싱 오니기리", genre:"리듬", icon:"icons/dancing_onigiri.png", url:"https://gw0212.github.io/dancing_onigiri/" },
+  { title:"던전 이스케이프", genre:"탈출/퍼즐", icon:"icons/dungeon_escape.png", url:"https://gw0212.github.io/dungeon_escape/" },
+  { title:"라이덴X", genre:"슈팅", icon:"icons/raidenx.png", url:"https://gw0212.github.io/raidenx/" },
+  { title:"미니 크아", genre:"아케이드", icon:"icons/mini_crazy_arcade.png", url:"https://gw0212.github.io/mini_crazy_arcade/" },
+  { title:"불멸의 이순신", genre:"액션", icon:"icons/immortal_yi_sun_sin.png", url:"https://gw0212.github.io/IMMORTAL_YI_SUN_SIN/" },
+  { title:"슈퍼 마리오 플래시 2", genre:"아케이드", icon:"icons/super_mario_flash2.jpg", url:"https://gw0212.github.io/suprmario_flash2/" },
+  { title:"스네이크", genre:"아케이드", icon:"icons/snake.png", url:"https://gw0212.github.io/snake/" },
+  { title:"스네일 밥", genre:"탈출/퍼즐", icon:"icons/snail_bob.png", url:"https://gw0212.github.io/snail_bob/" },
+  { title:"식물 vs 좀비", genre:"전략/디펜스", icon:"icons/plants_vs_zombies.jfif", url:"https://gw0212.github.io/plantvszombie/" },
+  { title:"앵그리 버드", genre:"캐주얼", icon:"icons/angry_bird.png", url:"https://gw0212.github.io/angry_bird/" },
+  { title:"어보이드 앤 서바이브", genre:"아케이드", icon:"icons/avoid_and_survive.png", url:"https://gw0212.github.io/avoid_and_survive/" },
+  { title:"엄지 파이터", genre:"격투", icon:"icons/thumb_fighter.png", url:"https://gw0212.github.io/thumb_fighter/" },
+  { title:"에어 하키", genre:"스포츠", icon:"icons/air_hockey.png", url:"https://gw0212.github.io/air_hockey/" },
+  { title:"오목", genre:"보드/퍼즐", icon:"icons/five_in_a_row.png", url:"https://gw0212.github.io/-Five_in_a_Row/" },
+  { title:"월드컵 2006 패널티", genre:"스포츠", icon:"icons/world_cup_penalty.png", url:"https://gw0212.github.io/world_cup_penalty/" },
+  { title:"지뢰찾기", genre:"보드/퍼즐", icon:"icons/minesweeper.png", url:"https://gw0212.github.io/finding_mind/" },
+  { title:"체스", genre:"보드/퍼즐", icon:"icons/chess.png", url:"https://gw0212.github.io/chess/" },
+  { title:"팩맨 어드벤스드", genre:"아케이드", icon:"icons/pacman_advanced.png", url:"https://gw0212.github.io/Pacman_Advanced/" },
 ];
 
 /* ═══════════════════════════════════
@@ -1198,7 +1218,8 @@ const SORT_OPTIONS = [
 const POPULAR_TITLES = [
   '슈퍼마리오 63', '팔라독', '전쟁시대 1', '풍선타워디펜스 5', '풍선타워디펜스 4',
   '메탈 슬러그 3 브루탈', '메탈 슬러그 디펜스', '박스헤드 2인용', '감옥탈출 리마스터',
-  '아이탈출 4', '보글보글2', '소닉 더 헤지혹', '카오스팩션1', '아빠와 나', '슈의 라면가게'
+  '아이탈출 4', '보글보글2', '소닉 더 헤지혹', '카오스팩션1', '아빠와 나', '슈의 라면가게',
+  '식물 vs 좀비', '앵그리 버드', '슈퍼 마리오 플래시 2', '2048', '스네이크', '체스', '팩맨 어드벤스드'
 ];
 const popularRank = new Map(POPULAR_TITLES.map((title, index) => [title, index]));
 let activeGenre = ALL_GENRE;
